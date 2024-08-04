@@ -1,10 +1,17 @@
-import Test from "./components/Test";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./pages/Login";
+import Lp from "./pages/Lp";
+import Calendar from "./pages/Calendar";
 
 function App() {
   return (
-    <>
-      <Test />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Lp />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/calendar" element={<Calendar />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
