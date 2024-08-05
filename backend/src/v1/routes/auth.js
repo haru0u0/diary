@@ -43,8 +43,8 @@ passport.deserializeUser(async (id, done) => {
     }
 });
 
+/*
 router.get("/secrets", (req, res) => {
-    //res.send("secrets")
     console.log(req.user);
     if (req.isAuthenticated()) {
         res.send("authenticated!");
@@ -52,20 +52,27 @@ router.get("/secrets", (req, res) => {
         res.send("not authenticated!");
     }
 });
+*/
 
-router.get("/auth", passport.authenticate("google", {
+router.get("/", passport.authenticate("google", {
     scope: ["profile", "email"],
 }));
 
-router.get(
-    "/auth/port",
-    passport.authenticate("google", {
-        successRedirect: "http://localhost/api/v1/secrets",
-        failureRedirect: "/",
-        session: true
-    })
-);
+router.get("/port", passport.authenticate("google", {
+    successRedirect: "/calendar",
+    failureRedirect: "/login",
+    session: true
+}));
 
+router.get("/isAuthed", (req, res) => {
+    if (req.isAuthenticated()) {
+        res.json({ authenticated: true });
+    } else {
+        res.json({ authenticated: false });
+    }
+});
+
+// signing up or logging in
 passport.use("google", new GoogleStrategy({
     clientID: process.env.G_CLIENT_ID,
     clientSecret: process.env.G_CLIENT_SECRET,

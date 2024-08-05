@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+pre,
+code,
+kbd,
+samp {
+    font-family: "M PLUS 2", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+    font-family: "VT323", monospace;
+    font-weight: 400;
+    font-size: x-large;
+    font-style: normal;
+}
+
+.font-mplus2 {
+    font-family: "M PLUS 2", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.font-vt {
+    font-family: "VT323", monospace;
+    font-weight: 400;
+    font-style: normal;
+}
