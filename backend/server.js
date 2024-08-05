@@ -12,7 +12,7 @@ app.use(cors({
 }))
 
 app.use('/api/v1', testRouter);
-app.use('/api/v1', authRouter);
+app.use('/api/v1/auth', authRouter);
 
 
 app.listen(port, () => {
