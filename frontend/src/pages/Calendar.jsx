@@ -1,11 +1,13 @@
-import useAuth from "../hooks/useAuth";
 import ReactCalendar from "react-calendar";
 import { useState } from "react";
 import { isSameDay } from "date-fns";
 import "../calendar.css";
+import useAuthFalseRedirect from "../hooks/useAuthFalseRedirect";
 
 function Calendar() {
-  useAuth();
+  useAuthFalseRedirect({
+    falsePath: "/",
+  });
 
   const [value, onChange] = useState();
 
@@ -20,7 +22,7 @@ function Calendar() {
   };
 
   return (
-    <div>
+    <div className="flex justify-center">
       <ReactCalendar
         onChange={onChange}
         value={value}

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosClient from "../api/axiosClient";
 
-function useAuth() {
+function useAuthSuccessRedirect(props) {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
   const navigate = useNavigate();
 
@@ -12,19 +12,18 @@ function useAuth() {
       .then((res) => {
         if (res.data.authenticated) {
           setIsAuthenticated(true);
+          navigate(props.successPath);
         } else {
           setIsAuthenticated(false);
-          navigate("/login");
         }
       })
       .catch((error) => {
         console.error("Error checking authentication", error);
         setIsAuthenticated(false);
-        navigate("/login");
       });
   }, [navigate]);
 
   return isAuthenticated;
 }
 
-export default useAuth;
+export default useAuthSuccessRedirect;

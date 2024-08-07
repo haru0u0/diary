@@ -2,8 +2,8 @@ import NavbarItem from "./NavbarItem";
 
 function Navbar() {
   return (
-    <div className="fixed bottom-0 w-full">
-      <div className="font-vt flex justify-around">
+    <div className="fixed bottom-0 w-full h-20 lg:mt-0 lg:w-60 lg:top-0 lg:left-0 lg:h-full bg-slate-300">
+      <div className="font-vt flex justify-around lg:flex-col lg:justify-center h-full items-center">
         <NavbarItem
           path="/wordbank"
           img="../public/images/book.png"

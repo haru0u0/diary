@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import useAuthFalseRedirect from "../hooks/useAuthFalseRedirect";
 
 function New() {
+  useAuthFalseRedirect({
+    falsePath: "/",
+  });
   function openModal() {
     document.getElementById("dialog-rounded").showModal();
   }
@@ -11,7 +15,7 @@ function New() {
 
   return (
     <>
-      <div className="grid grid-cols-2 mb-2">
+      <div className="grid grid-cols-2 mb-2 lg:ml-5">
         <Link
           to="/calendar"
           className="font-vt text-2xl justify-self-start self-center"
@@ -26,11 +30,11 @@ function New() {
           Submit
         </button>
       </div>
-      <form id="diary" method="post" className="block">
+      <form id="diary" method="post" className="block lg:ml-5">
         <textarea
           name="Text1"
           placeholder="How was your day?"
-          rows="5"
+          rows="10"
           className="w-full border-0"
           autoFocus
         ></textarea>
