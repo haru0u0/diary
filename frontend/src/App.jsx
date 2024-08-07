@@ -2,14 +2,14 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Lp from "./pages/Lp";
 import Calendar from "./pages/Calendar";
-import "nes.css/css/nes.min.css";
-import "./index.css";
 import Layout from "./layout/Layout";
 import Wordbank from "./pages/Wordbank";
 import Collection from "./pages/Collection";
 import Setting from "./pages/Setting";
 import New from "./pages/New";
 import LayoutWithNav from "./layout/LayoutWithNav";
+import "nes.css/css/nes.min.css";
+import "./index.css";
 
 function App() {
   return (
