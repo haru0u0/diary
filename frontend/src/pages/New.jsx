@@ -1,10 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuthFalseRedirect from "../hooks/useAuthFalseRedirect";
+import axiosClient from "../api/axiosClient";
 
 function New() {
+  let navigate = useNavigate();
   useAuthFalseRedirect({
     falsePath: "/",
   });
+
   function openModal() {
     document.getElementById("dialog-rounded").showModal();
   }
@@ -12,6 +15,25 @@ function New() {
   function closeModal() {
     document.getElementById("dialog-rounded").close();
   }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const input = new FormData(e.target).get("entry");
+
+    try {
+      const created = await axiosClient.post("/entry/new", {
+        diary: input,
+      });
+
+      //console.log("version:" + created.data.version_id);
+      //console.log("entry:" + created.data.entry_id);
+
+      navigate(`/version/${created.data.version_id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -30,9 +52,9 @@ function New() {
           Submit
         </button>
       </div>
-      <form id="diary" method="post" className="block lg:ml-5">
+      <form id="diary" className="block lg:ml-5" onSubmit={handleSubmit}>
         <textarea
-          name="Text1"
+          name="entry"
           placeholder="How was your day?"
           rows="10"
           className="w-full border-0"

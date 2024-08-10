@@ -1,58 +1,10 @@
 import express from 'express';
-import pg from "pg";
 import 'dotenv/config';
-import session from "express-session";
+import db from '../../../db.js';
 import passport from 'passport';
 import GoogleStrategy from 'passport-google-oauth20';
 
 const router = express.Router();
-const app = express();
-
-router.use(
-    session({
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: true,
-        cookie: {
-            maxAge: 24 * 60 * 60 * 1000
-        }
-    })
-);
-router.use(passport.initialize());
-router.use(passport.session());
-
-const db = new pg.Client({
-    user: process.env.DB_USR,
-    host: process.env.DB_HOST,
-    database: process.env.DB_DB,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
-});
-db.connect();
-
-passport.serializeUser((user, done) => {
-    done(null, user.id);
-});
-
-passport.deserializeUser(async (id, done) => {
-    try {
-        const result = await db.query("SELECT * FROM users WHERE id = $1", [id]);
-        done(null, result.rows[0]);
-    } catch (err) {
-        done(err);
-    }
-});
-
-/*
-router.get("/secrets", (req, res) => {
-    console.log(req.user);
-    if (req.isAuthenticated()) {
-        res.send("authenticated!");
-    } else {
-        res.send("not authenticated!");
-    }
-});
-*/
 
 router.get("/", passport.authenticate("google", {
     scope: ["profile", "email"],
@@ -70,6 +22,7 @@ router.get("/isAuthed", (req, res) => {
     } else {
         res.json({ authenticated: false });
     }
+    console.log(req.user);
 });
 
 // signing up or logging in
@@ -79,15 +32,14 @@ passport.use("google", new GoogleStrategy({
     callbackURL: "http://localhost/api/v1/auth/port",
 }, async (accessToken, refreshToken, profile, cb) => {
     try {
-        const result = await db.query("SELECT * FROM users WHERE email = $1",
+        const result = await db.query("SELECT * FROM account WHERE email = $1",
             [profile._json.email]
         );
         if (result.rows.length === 0) {
             const newUser = await db.query(
-                "INSERT INTO users (email) VALUES ($1)",
-                [profile._json.email]
-            );
-            const createdUser = await db.query("SELECT * FROM users WHERE email = $1",
+                "INSERT INTO account (email) VALUES ($1)",
+                [profile._json.email]);
+            const createdUser = await db.query("SELECT * FROM account WHERE email = $1",
                 [profile._json.email]
             );
             return cb(null, createdUser.rows[0]);
@@ -98,9 +50,9 @@ passport.use("google", new GoogleStrategy({
     catch (err) {
         return cb(err);
     }
-}
-)
-);
+}));
+
+
 
 
 export default router;
