@@ -18,7 +18,7 @@ function Setting() {
           type="text"
           name="name"
           id="name"
-          value="Haruka"
+          value="Haruka" 
           className="border-4 border-black block"
           required
         />

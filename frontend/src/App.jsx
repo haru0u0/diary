@@ -10,6 +10,7 @@ import New from "./pages/New";
 import LayoutWithNav from "./layout/LayoutWithNav";
 import "nes.css/css/nes.min.css";
 import "./index.css";
+import VerDetail from "./pages/VerDetail";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         </Route>
         <Route path="" element={<Layout />}>
           <Route path="/new" element={<New />} />
+          <Route path="/version/:id" element={<VerDetail />} />
         </Route>
       </Routes>
     </BrowserRouter>

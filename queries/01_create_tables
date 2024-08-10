@@ -1,6 +1,24 @@
-CREATE TABLE users (
+CREATE TABLE account (
    id           SERIAL PRIMARY KEY NOT NULL,
    email        VARCHAR(255) UNIQUE NOT NULL,
    name         VARCHAR(20),
    created_at   TIMESTAMP NOT NULL default CURRENT_TIMESTAMP
+);
+
+CREATE TABLE entry (
+   id           SERIAL PRIMARY KEY NOT NULL,
+   user_id      INT  NOT NULL,
+   is_deleted   BOOLEAN NOT NULL default FALSE,
+   created_at   TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
+   deleted_at   TIMESTAMP
+);
+
+CREATE TABLE version (
+   id           SERIAL PRIMARY KEY NOT NULL,
+   entry_id      INT  NOT NULL,
+   version_num    INT NOT NULL,
+   content        VARCHAR(1000),
+   is_deleted   BOOLEAN NOT NULL default FALSE,
+   created_at   TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
+   deleted_at   TIMESTAMP
 );
