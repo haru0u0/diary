@@ -13,7 +13,8 @@ const app = express();
 
 //to avoid cross-origin error 
 app.use(cors({
-    origin: "http://localhost:3000"
+    origin: "http://localhost:3000",
+    credentials: true
 }))
 
 //session management
