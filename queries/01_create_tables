@@ -1,8 +1,9 @@
 CREATE TABLE account (
    id           SERIAL PRIMARY KEY NOT NULL,
-   email        VARCHAR(255) UNIQUE NOT NULL,
+   email        VARCHAR(255) UNIQUE,
    name         VARCHAR(20),
-   created_at   TIMESTAMP NOT NULL default CURRENT_TIMESTAMP
+   created_at   TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
+   deleted_at   TIMESTAMP
 );
 
 CREATE TABLE entry (

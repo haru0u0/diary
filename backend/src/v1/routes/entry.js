@@ -31,8 +31,6 @@ router.get("/version", async (req, res) => {
 
 //get entries on the selected date, with the content of the latest version of each entry 
 router.get("/date", async (req, res) => {
-    console.log(req.query.start);
-    console.log(req.query.end);
     const dateEntry = await db.query(
         "SELECT DISTINCT ON (e.id) e.id, e.user_id, e.is_deleted, v.id AS version_id, v.version_num, v.content, v.created_at FROM entry e JOIN version v ON e.id = v.entry_id WHERE e.user_id = $3 and e.is_deleted = false and e.created_at >= $1 and e.created_at < $2 ORDER BY e.id, v.created_at DESC;",
         [req.query.start, req.query.end, req.user.id]);

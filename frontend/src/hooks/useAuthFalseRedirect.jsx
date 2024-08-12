@@ -11,7 +11,7 @@ function useAuthFalseRedirect(props) {
       .get("/auth/isAuthed")
       .then((res) => {
         if (res.data.authenticated) {
-          setIsAuthenticated(true);
+          setIsAuthenticated(res.data.user);
         } else {
           setIsAuthenticated(false);
           navigate(props.falsePath);

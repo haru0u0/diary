@@ -18,12 +18,38 @@ router.get("/port", passport.authenticate("google", {
 
 router.get("/isAuthed", (req, res) => {
     if (req.isAuthenticated()) {
-        res.json({ authenticated: true });
+        res.json({ authenticated: true, user: req.user.email });
     } else {
         res.json({ authenticated: false });
     }
-    console.log(req.user);
 });
+
+router.post('/logout', function (req, res, next) {
+    req.logout(function (err) {
+        if (err) { return next(err); }
+        req.session.destroy(function (err) {
+            res.clearCookie('connect.sid');
+            res.redirect('/');
+        });
+    });
+});
+
+router.post('/delete', async function (req, res, next) {
+    console.log("receive a request!")
+    const now = new Date();
+    const version = await db.query(
+        "UPDATE account SET email=NULL, deleted_at=$2 WHERE id=$1",
+        [req.user.id, now]);
+
+    req.logout(function (err) {
+        if (err) { return next(err); }
+        req.session.destroy(function (err) {
+            res.clearCookie('connect.sid');
+            res.redirect('/');
+        });
+    });
+});
+
 
 // signing up or logging in
 passport.use("google", new GoogleStrategy({

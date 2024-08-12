@@ -1,39 +1,71 @@
 import useAuthFalseRedirect from "../hooks/useAuthFalseRedirect";
+import axiosClient from "../api/axiosClient";
+import { useNavigate } from "react-router-dom";
 
 function Setting() {
-  useAuthFalseRedirect({
+  let navigate = useNavigate();
+  const user_email = useAuthFalseRedirect({
     falsePath: "/",
   });
+
+  async function handleLogout() {
+    try {
+      await axiosClient.post("/auth/logout");
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function handleDelete() {
+    try {
+      await axiosClient.post("/auth/delete");
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  function openModal() {
+    document.getElementById("dialog-rounded").showModal();
+  }
+
+  function closeModal() {
+    document.getElementById("dialog-rounded").close();
+  }
 
   return (
     <>
       <div>
         <h2 className="text-xl">You are logged in as:</h2>
-        <p>inu@gmail.inu</p>
+        <p>{user_email}</p>
       </div>
-      {/*
-      <h2 className="text-xl">Your name</h2>
-      <form action="" method="get">
-        <input
-          type="text"
-          name="name"
-          id="name"
-          value="Haruka" 
-          className="border-4 border-black block"
-          required
-        />
-        <div className="form-example">
-          <input className="nes-btn" type="submit" value="Subscribe!" />
-        </div>
-      </form>
-      */}
-      <a className="nes-btn mt-10" href="#">
+      <button className="nes-btn mt-10 is-primary" onClick={handleLogout}>
         Log out
-      </a>
+      </button>
       <br></br>
-      <a className="nes-btn mt-3" href="#">
+      <button className="nes-btn mt-3" onClick={openModal}>
         Delete your account
-      </a>
+      </button>
+
+      <dialog className="nes-dialog is-rounded w-full" id="dialog-rounded">
+        <h2 className="text-2xl">Are you absolutely sure?</h2>
+        <p>
+          This action cannot be undone. This will permanently delete your
+          account and remove your data from our servers.
+        </p>
+        <div>
+          <button className="m-3 ml-0 nes-btn" onClick={closeModal}>
+            Cancel
+          </button>
+          <button
+            className="m-3 ml-0 nes-btn is-primary"
+            onClick={handleDelete}
+          >
+            Yes, delete my account
+          </button>
+        </div>
+      </dialog>
     </>
   );
 }
