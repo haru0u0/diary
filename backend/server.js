@@ -32,13 +32,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser((user, done) => {
-    console.log("serialize");
     done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
-    console.log("deserialize");
-    console.log("id:" + id);
     try {
         const result = await db.query("SELECT * FROM account WHERE id = $1", [id]);
         done(null, result.rows[0]);

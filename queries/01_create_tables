@@ -23,3 +23,23 @@ CREATE TABLE version (
    created_at   TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
    deleted_at   TIMESTAMP
 );
+
+CREATE TABLE feedback (
+   id           SERIAL PRIMARY KEY NOT NULL,
+   version_id   INT NOT NULL,
+   sticker_id   INT,
+   response     VARCHAR(1000)
+);
+
+CREATE TABLE expression (
+   id           SERIAL PRIMARY KEY NOT NULL,
+   expression     VARCHAR(200) NOT NULL
+);
+
+CREATE TABLE version_expression (
+   id           SERIAL PRIMARY KEY NOT NULL,
+   expression_id     INT NOT NULL,
+   version_id        INT NOT NULL,
+   explanation       VARCHAR(1000) NOT NULL,
+   original          VARCHAR(200) NOT NULL
+);

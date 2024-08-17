@@ -31,7 +31,6 @@ function Calendar() {
           params: { start: startTime, end: endTime },
         });
         setDateEntries(res.data.dateEntry.rows);
-        console.log(res.data.dateEntry.rows);
       } catch (err) {
         console.log(err);
       }
