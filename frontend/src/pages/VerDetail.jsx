@@ -2,13 +2,16 @@ import useAuthFalseRedirect from "../hooks/useAuthFalseRedirect";
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axiosClient from "../api/axiosClient";
+import moment from "moment";
 
 function VerDetail() {
   const incoming_params = useParams();
   useAuthFalseRedirect({
     falsePath: "/",
   });
-  const [content, setContent] = useState("");
+  const [version, setContent] = useState("");
+  const [feedback, setFeedback] = useState("");
+  const [expressions, setExpressions] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,8 +19,9 @@ function VerDetail() {
         const res = await axiosClient.get("/entry/version", {
           params: { id: incoming_params.id },
         });
-        setContent(res.data.version.rows[0].content);
-        console.log(res.data.version.rows[0].content);
+        setContent(res.data.version);
+        setFeedback(res.data.feedback);
+        setExpressions(res.data.expressions || []);
       } catch (err) {
         console.log(err);
       }
@@ -26,18 +30,62 @@ function VerDetail() {
     fetchData();
   }, [incoming_params.id]);
 
+  console.log(version);
+
   return (
     <>
-      <div className="grid grid-cols-2 mb-2 lg:ml-5">
-        <Link
-          to="/calendar"
-          className="font-vt text-2xl justify-self-start self-center"
-        >
-          &times;
+      <div className="text-center my-8 lg:mx-56">
+        <h2>
+          Journal on
+          <br></br>
+          <span className="text-4xl">
+            {moment(version.created_at).format("MMM Do YYYY")}
+          </span>
+        </h2>
+        <p className="font-vt">{moment(version.created_at).format("h:mm a")}</p>
+        <div className="m-5">{version.content}</div>
+        <div className="nes-balloon from-left nes-pointer mb-10 w-full">
+          {feedback}
+        </div>
+        <img
+          src="../public/images/brown_dog_00.png"
+          className="object-contain h-14"
+        ></img>
+        <div className="m-5">
+          <h3 className="text-3xl">Next Time, Try These Alternatives!</h3>
+          <p className="text-sm">
+            Explore three fresh phrases to make your diary entries more engaging
+          </p>
+        </div>
+        {expressions.length > 0 ? (
+          expressions.map((expression, index) => (
+            <div key={index}>
+              <div className="nes-container is-rounded">
+                <div className="">
+                  <p className="inline text-sm">{expression.original} </p>
+                  <i className="fa-solid fa-arrow-right fa-xs"></i>
+                  <p className="font-vt text-3xl">{expression.expression}</p>
+                </div>
+                <p>{expression.explanation}</p>
+              </div>
+              <div className="m-5"></div>
+            </div>
+          ))
+        ) : (
+          <p>No expressions available</p>
+        )}
+        <div className="m-5">
+          <h3 className="text-3xl">Congrats! You’ve Earned...</h3>
+          <p className="text-sm">
+            Celebrate your exploration of a variety of topics with the badges
+          </p>
+        </div>
+      </div>
+      <div className="flex justify-center">
+        <Link to="/calendar" className="nes-btn is-primary font-vt text-lg ">
+          Finish Review
         </Link>
       </div>
-      <p>{incoming_params.id}</p>
-      <p>{content}</p>
     </>
   );
 }
