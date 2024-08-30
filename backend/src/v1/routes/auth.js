@@ -55,7 +55,7 @@ router.post('/delete', async function (req, res, next) {
 passport.use("google", new GoogleStrategy({
     clientID: process.env.G_CLIENT_ID,
     clientSecret: process.env.G_CLIENT_SECRET,
-    callbackURL: "/api/v1/auth/port",
+    callbackURL: process.env.G_CALL_BACK,
 }, async (accessToken, refreshToken, profile, cb) => {
     try {
         const result = await db.query("SELECT * FROM account WHERE email = $1",
