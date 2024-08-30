@@ -8,6 +8,8 @@ import Collection from "./pages/Collection";
 import Setting from "./pages/Setting";
 import New from "./pages/New";
 import LayoutWithNav from "./layout/LayoutWithNav";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import LpLayout from "./components/Lp/LpHeader";
 import "nes.css/css/nes.min.css";
 import "./index.css";
 import VerDetail from "./pages/VerDetail";
@@ -16,8 +18,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Lp />} />
+        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="" element={<LayoutWithNav />}>
-          <Route path="/" element={<Lp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/wordbank" element={<Wordbank />} />
           <Route path="/calendar" element={<Calendar />} />

@@ -6,8 +6,8 @@ import GoogleStrategy from 'passport-google-oauth20';
 
 const router = express.Router();
 
-router.get("/", passport.authenticate("google", {
-    scope: ["profile", "email"],
+router.get("/", passport.authenticate('google', {
+    scope: ['profile', 'email'],
 }));
 
 router.get("/port", passport.authenticate("google", {
@@ -33,7 +33,6 @@ router.post('/logout', function (req, res, next) {
         });
     });
 });
-
 router.post('/delete', async function (req, res, next) {
     console.log("receive a request!")
     const now = new Date();
@@ -49,6 +48,7 @@ router.post('/delete', async function (req, res, next) {
         });
     });
 });
+
 
 
 // signing up or logging in
