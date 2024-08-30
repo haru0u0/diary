@@ -45,7 +45,7 @@ function VerDetail() {
           {feedback}
         </div>
         <img
-          src="../public/images/brown_dog_00.png"
+          src="/images/brown_dog_00.png"
           className="object-contain h-14"
         ></img>
         <div className="m-5">
@@ -77,7 +77,7 @@ function VerDetail() {
             Celebrate your exploration of a variety of topics with the badges
           </p>
           <img
-            src={`../../public/images/badges/${badge}.png`}
+            src={`/images/badges/${badge}.png`}
             className="object-contain h-36 w-36"
           />
           <p className="capitalize">{badge} Badge</p>
