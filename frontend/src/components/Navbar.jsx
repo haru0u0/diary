@@ -8,23 +8,23 @@ function Navbar() {
         <div className="font-vt flex justify-around lg:flex-col lg:justify-center h-full items-center">
           <NavbarItem
             path="/wordbank"
-            img="../public/images/book.png"
+            img="/images/book.png"
             label="Word Bank"
           />
           <NavbarItem
             path="/calendar"
-            img="../public/images/calendar.png"
+            img="/images/calendar.png"
             label="Calendar"
           />
-          <NavbarItem path="/new" img="../public/images/pen.png" label="New" />
+          <NavbarItem path="/new" img="/images/pen.png" label="New" />
           <NavbarItem
             path="/collection"
-            img="../public/images/collection.png"
+            img="/images/collection.png"
             label="Collection"
           />
           <NavbarItem
             path="/setting"
-            img="../public/images/setting.png"
+            img="/images/setting.png"
             label="Setting"
           />
         </div>

@@ -32,14 +32,14 @@ function Collection() {
     if (userBadgeArr.includes(badge)) {
       return (
         <img
-          src={`../../public/images/badges/${badge}.png`}
+          src={`/images/badges/${badge}.png`}
           className="object-contain h-20 w-20 bg-amber-100"
         />
       );
     } else {
       return (
         <img
-          src={`../../public/images/hatena.png`}
+          src={`/images/hatena.png`}
           className="object-contain h-20 w-20 bg-slate-200"
         />
       );

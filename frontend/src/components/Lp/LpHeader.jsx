@@ -4,10 +4,7 @@ function LpHeader() {
       <div className="text-center">
         <div className="pt-36 bg-slate-300">
           <div>
-            <img
-              src="../public/images/chara.png"
-              className="h-32 w-32 m-auto poyooon"
-            />
+            <img src="/images/chara.png" className="h-32 w-32 m-auto poyooon" />
             <h2 className="text-5xl">Diary Quest</h2>
             <p>Enhance your English fluency through journaling</p>
             <a

@@ -67,7 +67,7 @@ function Calendar() {
         return (
           <div className="flex justify-center">
             <img
-              src={`../../public/images/badges/${dateBadge[dateKey]}.png`}
+              src={`/images/badges/${dateBadge[dateKey]}.png`}
               className="object-contain pt-1 w-12 h-12"
             />
           </div>
