@@ -1,7 +1,7 @@
 import axiosClient from "./axiosClient";
 
-const checkApi = {
-    test: (params) => axiosClient.get("/test", params),
+const authApi = {
+    isAuthenticated: () => axiosClient.get("/auth/isAuthed"),
 }
 
-export default checkApi;
+export default authApi;

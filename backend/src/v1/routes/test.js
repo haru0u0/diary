@@ -1,7 +1,6 @@
 import express from 'express';
 import pg from "pg";
 import 'dotenv/config';
-
 const router = express.Router();
 
 const db = new pg.Client({
@@ -15,9 +14,8 @@ const db = new pg.Client({
 db.connect();
 
 router.get("/test", async (req, res) => {
-
+    req.query.country = "Japan";
     const data = await db.query("SELECT * FROM capitals WHERE country = $1", [req.query.country]);
-    console.log(data.rows[0].capital);
 
     res.json({
         "capital": data.rows[0].capital,
@@ -26,3 +24,4 @@ router.get("/test", async (req, res) => {
 
 
 export default router;
+

@@ -1,3 +1,7 @@
+Create DATABASE diary;
+
+## connect to the db with "\c diary"
+
 CREATE TABLE CAPITALS(
    ID           INT         PRIMARY KEY     NOT NULL,
    COUNTRY      CHAR(50)                    NOT NULL,

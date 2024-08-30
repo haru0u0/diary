@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+pre,
+code,
+kbd,
+samp {
+    font-family: "M PLUS 2", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    color: black;
+}
+
+a:hover,
+a:focus,
+p:hover,
+p:focus {
+    color: black;
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+    font-family: "VT323", monospace;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.font-mplus2 {
+    font-family: "M PLUS 2", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.font-vt {
+    font-family: "VT323", monospace;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.poyooon {
+    animation: poyooon 1000ms linear infinite,
+        delay-animation 3000ms linear infinite;
+}
+
+@keyframes poyooon {
+    0% {
+        transform: scale(1.0, 1.0) translate(0%, 0%);
+    }
+
+    10% {
+        transform: scale(1.1, 0.9) translate(0%, 5%);
+    }
+
+    40% {
+        transform: scale(1.2, 0.8) translate(0%, 15%);
+    }
+
+    50% {
+        transform: scale(1.0, 1.0) translate(0%, 0%);
+    }
+
+    60% {
+        transform: scale(0.9, 1.2) translate(0%, -100%);
+    }
+
+    75% {
+        transform: scale(0.9, 1.2) translate(0%, -20%);
+    }
+
+    85% {
+        transform: scale(1.2, 0.8) translate(0%, 15%);
+    }
+
+    100% {
+        transform: scale(1.0, 1.0) translate(0%, 0%);
+    }
+}
+
+@keyframes delay-animation {
+    0% {
+        transform: scale(1.0, 1.0) translate(0%, 0%);
+    }
+
+    50% {
+        transform: scale(1.0, 1.0) translate(0%, 0%);
+    }
+
+    50.01% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
