@@ -6,10 +6,7 @@ function LpFooter() {
       <div className="bg-slate-300 text-center">
         <div className="pb-36 pt-5">
           <h2 className="text-3xl">Let's Get Started!</h2>
-          <a
-            className="nes-btn is-primary mt-10"
-            href="http://localhost/api/v1/auth"
-          >
+          <a className="nes-btn is-primary mt-10" href="/api/v1/auth">
             <i className="fa-brands fa-google"></i>
             &nbsp;Login / Sign Up with Google
           </a>
