@@ -72,10 +72,7 @@ function New() {
       <section>
         <div className="fixed bottom-0 right-0 m-2">
           <button onClick={() => openModal()}>
-            <img
-              src="../public/images/book.png"
-              className="object-contain h-12 w-12"
-            />
+            <img src="/images/book.png" className="object-contain h-12 w-12" />
           </button>
         </div>
         <dialog

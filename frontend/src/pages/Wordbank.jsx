@@ -1,13 +1,7 @@
-import useAuthFalseRedirect from "../hooks/useAuthFalseRedirect";
 import axiosClient from "../api/axiosClient";
 import { useEffect, useState } from "react";
 
 function Wordbank() {
-  useAuthFalseRedirect({
-    successPath: "/wordbank",
-    falsePath: "/",
-  });
-
   const [list, setList] = useState([]);
 
   useEffect(() => {
