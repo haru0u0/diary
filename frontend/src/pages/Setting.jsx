@@ -1,12 +1,19 @@
-import useAuthFalseRedirect from "../hooks/useAuthFalseRedirect";
 import axiosClient from "../api/axiosClient";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Setting() {
   let navigate = useNavigate();
-  const user_email = useAuthFalseRedirect({
-    falsePath: "/",
-  });
+  const [account, setAccount] = useState("Loading");
+
+  useEffect(() => {
+    async function checkAuth() {
+      const auth = await axiosClient.get("/auth/isAuthed");
+      setAccount(auth.data.user);
+    }
+    checkAuth();
+  }, []);
 
   async function handleLogout() {
     try {
@@ -36,9 +43,17 @@ function Setting() {
 
   return (
     <>
-      <div>
+      <div className="my-5">
         <h2 className="text-xl">You are logged in as:</h2>
-        <p>{user_email}</p>
+        <p>{account}</p>
+      </div>
+      <div>
+        <h2 className="text-xl">Links To...</h2>
+        <Link to="https://forms.gle/PfM8xEaGxXSE6rdP6" target="_blank">
+          Contact
+        </Link>
+        <br></br>
+        <Link to="/privacypolicy">Privacy Policy</Link>
       </div>
       <button className="nes-btn mt-10 is-primary" onClick={handleLogout}>
         Log out

@@ -1,13 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
-import useAuthFalseRedirect from "../hooks/useAuthFalseRedirect";
 import axiosClient from "../api/axiosClient";
+import { useState, useEffect } from "react";
 
 function New() {
   let navigate = useNavigate();
-  useAuthFalseRedirect({
-    falsePath: "/",
-  });
-
   function openModal() {
     document.getElementById("dialog-rounded").showModal();
   }
@@ -26,14 +22,25 @@ function New() {
         diary: input,
       });
 
-      //console.log("version:" + created.data.version_id);
-      //console.log("entry:" + created.data.entry_id);
-
       navigate(`/version/${created.data.version_id}`);
     } catch (err) {
       console.log(err);
     }
   };
+
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await axiosClient.get("/collection/expression");
+        setList(res.data.expressions.rows || []);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -72,14 +79,41 @@ function New() {
           </button>
         </div>
         <dialog
-          className="nes-dialog is-rounded w-full h-full"
+          className="nes-dialog is-rounded h-full w-full"
           id="dialog-rounded"
         >
-          <button className="text-2xl" onClick={() => closeModal()}>
-            &times;
-          </button>
-          <h2 className="text-2xl">Rounded dialog</h2>
-          <p>This is a dialog.</p>
+          <div className="border-b-4 border-black pb-4">
+            <button
+              className="text-2xl float-right"
+              onClick={() => closeModal()}
+            >
+              &times;
+            </button>
+            <div>
+              <h2 className="text-3xl">Word Bank</h2>
+              <p>
+                Use the expressions you learnt in your previous entries to
+                enrich your expression.
+              </p>
+            </div>
+          </div>
+          {list.length > 0 ? (
+            list.map((expression, index) => (
+              <div key={index}>
+                <div className="border-b-2 border-black p-4 text-wrap break-words">
+                  <div className="text-wrap">
+                    <p className="inline text-sm">{expression.original} </p>
+                    <i className="fa-solid fa-arrow-right fa-xs"></i>
+                    <p className="font-vt text-3xl">{expression.expression}</p>
+                  </div>
+                  <p>{expression.explanation}</p>
+                </div>
+                <div className="m-5"></div>
+              </div>
+            ))
+          ) : (
+            <p>No expressions available</p>
+          )}
         </dialog>
       </section>
     </>
@@ -87,28 +121,3 @@ function New() {
 }
 
 export default New;
-
-/*
-  function openModal() {
-    document.querySelector("#modal").classList.remove("hidden");
-  }
-
-  function closeModal() {
-    document.querySelector("#modal").classList.add("hidden");
-  }
-  
-        <div className="fixed bottom-0 right-0 m-2">
-        <button onClick={() => openModal()}>
-          <img
-            src="../public/images/book.png"
-            className="object-contain h-12 w-12"
-          />
-        </button>
-      </div>
-      <div className="nes-container with-title is-rounded hidden" id="modal">
-        <button className="text-2xl block" onClick={() => closeModal()}>
-          &times;
-        </button>
-        <p>Alert: this is a dialog.</p>
-      </div>
-  */

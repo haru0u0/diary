@@ -3,6 +3,7 @@ import cors from "cors";
 import testRouter from "./src/v1/routes/test.js";
 import authRouter from "./src/v1/routes/auth.js";
 import entryRouter from "./src/v1/routes/entry.js"
+import collectionRouter from "./src/v1/routes/collection.js"
 import 'dotenv/config';
 import session from "express-session";
 import passport from 'passport';
@@ -13,7 +14,7 @@ const app = express();
 
 //to avoid cross-origin error 
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "http://127.0.0.1:3000",
     credentials: true
 }))
 
@@ -51,6 +52,7 @@ app.use(express.json());
 app.use('/api/v1', testRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/entry', entryRouter);
+app.use('/api/v1/collection', collectionRouter);
 
 
 //to debug

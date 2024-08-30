@@ -27,7 +27,7 @@ CREATE TABLE version (
 CREATE TABLE feedback (
    id           SERIAL PRIMARY KEY NOT NULL,
    version_id   INT NOT NULL,
-   sticker_id   INT,
+   badge_id   INT,
    response     VARCHAR(1000)
 );
 
@@ -43,3 +43,52 @@ CREATE TABLE version_expression (
    explanation       VARCHAR(1000) NOT NULL,
    original          VARCHAR(200) NOT NULL
 );
+
+CREATE TABLE badge (
+   id           SERIAL PRIMARY KEY NOT NULL,
+   name     VARCHAR(200) NOT NULL
+);
+
+INSERT INTO badge (name) VALUES ('beer');
+INSERT INTO badge (name) VALUES ('butterfly');
+INSERT INTO badge (name) VALUES ('cake');
+INSERT INTO badge (name) VALUES ('camera');
+INSERT INTO badge (name) VALUES ('car');
+INSERT INTO badge (name) VALUES ('chocolate');
+INSERT INTO badge (name) VALUES ('christmas_tree');
+INSERT INTO badge (name) VALUES ('computer');
+INSERT INTO badge (name) VALUES ('cycling');
+INSERT INTO badge (name) VALUES ('dog');
+
+INSERT INTO badge (name) VALUES ('firework');
+INSERT INTO badge (name) VALUES ('gift');
+INSERT INTO badge (name) VALUES ('green_tea');
+INSERT INTO badge (name) VALUES ('halloween');
+INSERT INTO badge (name) VALUES ('key');
+INSERT INTO badge (name) VALUES ('letter');
+INSERT INTO badge (name) VALUES ('lightning');
+INSERT INTO badge (name) VALUES ('map');
+INSERT INTO badge (name) VALUES ('medal');
+INSERT INTO badge (name) VALUES ('mug');
+
+INSERT INTO badge (name) VALUES ('office');
+INSERT INTO badge (name) VALUES ('panda');
+INSERT INTO badge (name) VALUES ('pasta');
+INSERT INTO badge (name) VALUES ('peach');
+INSERT INTO badge (name) VALUES ('pot');
+INSERT INTO badge (name) VALUES ('running');
+INSERT INTO badge (name) VALUES ('sakura');
+INSERT INTO badge (name) VALUES ('school');
+INSERT INTO badge (name) VALUES ('sloth');
+INSERT INTO badge (name) VALUES ('speaker');
+
+INSERT INTO badge (name) VALUES ('sun');
+INSERT INTO badge (name) VALUES ('sunflower');
+INSERT INTO badge (name) VALUES ('tomato');
+INSERT INTO badge (name) VALUES ('train');
+INSERT INTO badge (name) VALUES ('tree');
+INSERT INTO badge (name) VALUES ('tulip');
+INSERT INTO badge (name) VALUES ('ufo');
+INSERT INTO badge (name) VALUES ('umbrella');
+
+

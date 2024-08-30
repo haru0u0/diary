@@ -1,4 +1,3 @@
-import useAuthFalseRedirect from "../hooks/useAuthFalseRedirect";
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axiosClient from "../api/axiosClient";
@@ -6,11 +5,10 @@ import moment from "moment";
 
 function VerDetail() {
   const incoming_params = useParams();
-  useAuthFalseRedirect({
-    falsePath: "/",
-  });
+
   const [version, setContent] = useState("");
   const [feedback, setFeedback] = useState("");
+  const [badge, setBadge] = useState("");
   const [expressions, setExpressions] = useState([]);
 
   useEffect(() => {
@@ -21,6 +19,7 @@ function VerDetail() {
         });
         setContent(res.data.version);
         setFeedback(res.data.feedback);
+        setBadge(res.data.badge);
         setExpressions(res.data.expressions || []);
       } catch (err) {
         console.log(err);
@@ -29,8 +28,6 @@ function VerDetail() {
 
     fetchData();
   }, [incoming_params.id]);
-
-  console.log(version);
 
   return (
     <>
@@ -74,11 +71,16 @@ function VerDetail() {
         ) : (
           <p>No expressions available</p>
         )}
-        <div className="m-5">
+        <div className="m-5 grid justify-items-center grid-cols-1">
           <h3 className="text-3xl">Congrats! You’ve Earned...</h3>
           <p className="text-sm">
             Celebrate your exploration of a variety of topics with the badges
           </p>
+          <img
+            src={`../../public/images/badges/${badge}.png`}
+            className="object-contain h-36 w-36"
+          />
+          <p className="capitalize">{badge} Badge</p>
         </div>
       </div>
       <div className="flex justify-center">
